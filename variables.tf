@@ -46,16 +46,6 @@ variable "account_id" {
 # REPOSITORY
 
 variable "repository" {
-  type        = string
-  description = "Repository patch (i.e. 'Cyclenerd/google-workload-identity-federation')"
-}
-
-# SUBJECT
-# GitHub: repo:username/reponame:ref:refs/heads/main
-# GitLab: project_path:username/reponame:ref_type:branch:ref:main
-
-variable "subject" {
-  type        = string
-  description = "Subject (i.e. 'repo:username/reponame:ref:refs/heads/main')"
-  default     = null
+  type        = list(string)
+  description = "Repository patch (i.e. ['Cyclenerd/google-workload-identity-federation', 'another-org/another-repo'])"
 }

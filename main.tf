@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-locals {
-  attribute = var.subject != null ? "attribute.sub" : "attribute.repository"
-  value     = var.subject != null ? var.subject : var.repository
-}
 
 # SERVICE ACCOUNT
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account
@@ -33,7 +29,5 @@ data "google_service_account" "user" {
 resource "google_service_account_iam_binding" "wif-binding" {
   service_account_id = data.google_service_account.user.name
   role               = "roles/iam.workloadIdentityUser"
-  members = [
-    "principalSet://iam.googleapis.com/${var.pool_name}/${local.attribute}/${local.value}"
-  ]
+  members            = [for repo in var.repository : "principalSet://iam.googleapis.com/${var.pool_name}/attribute.repository/${repo}"]
 }
