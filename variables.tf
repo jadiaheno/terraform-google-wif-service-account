@@ -43,9 +43,9 @@ variable "account_id" {
   }
 }
 
-# REPOSITORY
+# REPOSITORIES
 
-variable "repository" {
+variable "repositories" {
   type        = list(string)
   description = "Repository patch (i.e. ['Cyclenerd/google-workload-identity-federation', 'another-org/another-repo'])"
 }

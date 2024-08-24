@@ -29,5 +29,5 @@ data "google_service_account" "user" {
 resource "google_service_account_iam_binding" "wif-binding" {
   service_account_id = data.google_service_account.user.name
   role               = "roles/iam.workloadIdentityUser"
-  members            = [for repo in var.repository : "principalSet://iam.googleapis.com/${var.pool_name}/attribute.repository/${repo}"]
+  members            = [for repo in var.repositories : "principalSet://iam.googleapis.com/${var.pool_name}/attribute.repository/${repo}"]
 }
